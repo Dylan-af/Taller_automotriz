@@ -34,7 +34,7 @@ Manual (shell)
 
 python manage.py shell
 
-Luego copia los comandos de shell_tests.txt para crear:
+Luego copia los comandos de shell_test.txt para crear:
 
     2 clientes (cada uno con un vehículo)
 
