@@ -68,6 +68,6 @@ Notas finales
 
 .gitignore asegura que no se suban archivos temporales ni la base de datos local.
 
-    shell_tests.txt contiene evidencia de la creación de registros y consultas ORM.
+    shell_test.txt contiene evidencia de la creación de registros y consultas ORM.
 
     Proyecto reproducible en cualquier máquina con Python 3.13+ y Django 5+.
