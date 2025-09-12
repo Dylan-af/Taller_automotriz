@@ -1,41 +1,39 @@
->>> from workshop.models import Cliente, Vehiculo, Servicio, OrdenReparacion
->>> 
->>> #Clientes y Vehículos
->>> c1 = Cliente.objects.create(nombre="Juan", apellido="Pérez", telefono="123456789", email="juan@example.com")
->>> c2 = Cliente.objects.create(nombre="María", apellido="Gómez", telefono="987654321")
->>> 
->>> v1 = Vehiculo.objects.create(patente="ABC123", marca="Toyota", modelo="Corolla", anio=2015, cliente=c1)
->>> v2 = Vehiculo.objects.create(patente="XYZ789", marca="Honda", modelo="Civic", anio=2018, cliente=c2)
->>> 
->>> #Servicios
->>> s1 = Servicio.objects.create(nombre="Cambio de aceite", precio=30000)
->>> s2 = Servicio.objects.create(nombre="Alineación y balanceo", precio=20000)
->>> s3 = Servicio.objects.create(nombre="Cambio de frenos", precio=50000)
->>> 
->>> #Órdenes de reparación
->>> o1 = OrdenReparacion.objects.create(vehiculo=v1, estado="en_progreso")
->>> o1.servicios.add(s1, s2)  # varios servicios
->>> o1.calcular_monto_total()
->>> 
->>> o2 = OrdenReparacion.objects.create(vehiculo=v2, estado="ingresado")
->>> o2.servicios.add(s3)  # un solo servicio
->>> o2.calcular_monto_total()
->>> #Vehículos de un cliente
->>> Cliente.objects.get(nombre="Juan").vehiculos.all()
-    <QuerySet [<Vehiculo: ABC123 - Toyota Corolla 2015>]>
->>> 
->>> #Órdenes de un vehículo
->>> Vehiculo.objects.get(patente="ABC123").ordenes.all()
-    <QuerySet [<OrdenReparacion: Orden #1 - ABC123 (en_progreso)>]>
->>> 
->>> #Servicios asociados a una orden
->>> OrdenReparacion.objects.get(id=o1.id).servicios.all()
-    <QuerySet [<Servicio: Cambio de aceite - $30000.00>, <Servicio: Alineación y balanceo - $20000.00>]>
->>> 
->>> #Órdenes en progreso
->>> OrdenReparacion.objects.filter(estado="en_progreso")
-    <QuerySet [<OrdenReparacion: Orden #1 - ABC123 (en_progreso)>]>
->>> 
->>> #Órdenes sin fecha_salida
->>> OrdenReparacion.objects.filter(fecha_salida__isnull=True)
-    <QuerySet [<OrdenReparacion: Orden #1 - ABC123 (en_progreso)>, <OrdenReparacion: Orden #2 - XYZ789 (ingresado)>]>
+# Creación de Clientes y Vehículos
+from workshop.models import Cliente, Vehiculo, Servicio, OrdenReparacion
+
+c1 = Cliente.objects.create(nombre="Juan", apellido="Pérez", telefono="123456789", email="juan@example.com")
+c2 = Cliente.objects.create(nombre="María", apellido="Gómez", telefono="987654321")
+
+v1 = Vehiculo.objects.create(patente="ABC123", marca="Toyota", modelo="Corolla", anio=2015, cliente=c1)
+v2 = Vehiculo.objects.create(patente="XYZ789", marca="Honda", modelo="Civic", anio=2018, cliente=c2)
+
+# Creación de Servicios
+s1 = Servicio.objects.create(nombre="Cambio de aceite", precio=30000)
+s2 = Servicio.objects.create(nombre="Alineación y balanceo", precio=20000)
+s3 = Servicio.objects.create(nombre="Cambio de frenos", precio=50000)
+
+# Creación de Órdenes de Reparación
+o1 = OrdenReparacion.objects.create(vehiculo=v1, estado="en_progreso")
+o1.servicios.add(s1, s2)
+o1.calcular_monto_total()
+
+o2 = OrdenReparacion.objects.create(vehiculo=v2, estado="ingresado")
+o2.servicios.add(s3)
+o2.calcular_monto_total()
+
+# Consultas de prueba
+
+# Vehículos de un cliente
+Cliente.objects.get(nombre="Juan").vehiculos.all()
+
+# Órdenes de un vehículo
+Vehiculo.objects.get(patente="ABC123").ordenes.all()
+
+# Servicios asociados a una orden
+OrdenReparacion.objects.get(id=o1.id).servicios.all()
+
+# Órdenes en progreso
+OrdenReparacion.objects.filter(estado="en_progreso")
+
+# Órdenes sin fecha_salida
+OrdenReparacion.objects.filter(fecha_salida__isnull=True)
