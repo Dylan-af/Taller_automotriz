@@ -1,0 +1,17 @@
+# Ignorar archivos compilados de Python
+*.pyc
+__pycache__/
+
+# Base de datos local
+db.sqlite3
+
+# Entorno virtual
+.env
+venv/
+
+# Logs y otros
+*.log
+*.DS_Store
+
+# Archivos estáticos compilados
+/staticfiles/
