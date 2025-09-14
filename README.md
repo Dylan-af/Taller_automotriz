@@ -8,8 +8,6 @@ Proyecto Django para gestionar clientes, vehículos, servicios y órdenes de rep
 
 ## Instalación
 
-1. Clonar el repositorio:
-
 ```bash
 git clone https://github.com/Dylan-af/Taller_automotriz.git
 cd taller_automotriz
